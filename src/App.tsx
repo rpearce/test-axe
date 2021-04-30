@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useCallback, useState }  from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [flipColors, setFlipColors] = useState(false)
+
+  const toggleFlipColors = useCallback(() => {
+    setFlipColors(!flipColors)
+  }, [ flipColors ])
+
+  const headerCn = flipColors
+    ? 'App-header App-header-flipped'
+    : 'App-header'
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header className={headerCn}>
+        <img src={logo} className="App-logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -18,6 +28,9 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={toggleFlipColors} type="button">
+          Flip colors
+        </button>
       </header>
     </div>
   );
